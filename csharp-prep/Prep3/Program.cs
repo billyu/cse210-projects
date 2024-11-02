@@ -17,19 +17,20 @@ class Program
         // Loop until user quit the game        
         do
         {
-            // // Generate magic number using random function
-            // Random randomGenerator = new Random();
-            // magicNumber = randomGenerator.Next(1, 101);
+            // Generate magic number using random function
+            Random randomGenerator = new Random();
+            magicNumber = randomGenerator.Next(1, 101);
 
-            // Ask user for magic number
-            Console.Write("What is the magic number?");
-            magicNumber = int.Parse(Console.ReadLine());
+            Console.WriteLine("Please guess a number between 1 and 100.");
 
             // Reset guess count
             guessCount = 0;
 
+            // Reset guess
+            guess = -1;
+
             // Loop until user guesses the magic number
-            while (true) 
+            while (guess != magicNumber) 
             {
                 // Ask user for guess
                 Console.Write("What is your guess?");
@@ -41,7 +42,6 @@ class Program
                 {
                     Console.WriteLine("You guessed it!");
                     Console.WriteLine($"It took you {guessCount} guesses.");
-                    break;
                 }
                 else if (guess < magicNumber)
                 {
@@ -51,12 +51,13 @@ class Program
                 {
                     Console.WriteLine("Lower");
                 }
-
             }
 
             // Ask user if they want to play again
             Console.Write("Do you want to play again? (yes/no)");
             response = Console.ReadLine();
         } while (response == "yes");
+
+        Console.WriteLine("Goodbye!");
     }
 }
