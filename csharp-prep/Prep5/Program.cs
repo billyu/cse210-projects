@@ -50,6 +50,6 @@ class Program
 
     static void DisplayResult(string name, int number)
     {
-        Console.WriteLine($"Brother {name}, The square of your number is {number}.");
+        Console.WriteLine($"Hi {name}, The square of your number is {number}.");
     }
 }
