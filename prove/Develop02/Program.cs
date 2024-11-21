@@ -6,7 +6,6 @@ class Program
     {
         string input = "";
         Journal journal = new Journal();
-        PromptGenerator promptGenerator = new PromptGenerator();
 
         // Loop until the user chooses to quit
         do
@@ -21,7 +20,7 @@ class Program
             // Process the user's choice
             if (input == "1")
             {
-                journal.AddNewEntry(promptGenerator);
+                journal.CreateNewEntry();
             }
             else if (input == "2")
             {

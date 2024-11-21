@@ -16,9 +16,10 @@ public class Journal
         _entries.Add(newEntry);
     }
 
-    public void AddNewEntry(PromptGenerator promptGenerator)
+    public void CreateNewEntry()
     {
         // variables
+        PromptGenerator promptGenerator = new PromptGenerator();
         DateTime date = DateTime.Now;
         string promptText = promptGenerator.GetRandomPrompt();
         string entryText = "";
