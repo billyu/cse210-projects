@@ -21,21 +21,7 @@ class Program
             // Process the user's choice
             if (input == "1")
             {
-                // Write a new entry
-                // variables
-                DateTime date = DateTime.Now;
-                string promptText = promptGenerator.GetRandomPrompt();
-                string entryText = "";
-
-                // Get the user's response
-                Console.WriteLine(promptText);
-                Console.Write("> ");
-                entryText = Console.ReadLine();
-                
-                // Create a new entry
-                Entry newEntry = new Entry(date, promptText, entryText);
-                journal.AddEntry(newEntry);
-
+                journal.AddNewEntry(promptGenerator);
             }
             else if (input == "2")
             {

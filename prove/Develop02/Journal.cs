@@ -16,6 +16,23 @@ public class Journal
         _entries.Add(newEntry);
     }
 
+    public void AddNewEntry(PromptGenerator promptGenerator)
+    {
+        // variables
+        DateTime date = DateTime.Now;
+        string promptText = promptGenerator.GetRandomPrompt();
+        string entryText = "";
+
+        // Get the user's response
+        Console.WriteLine(promptText);
+        Console.Write("> ");
+        entryText = Console.ReadLine();
+                
+        // Create a new entry
+        Entry newEntry = new Entry(date, promptText, entryText);
+        AddEntry(newEntry);
+    }
+
     public void DisplayAll()
     {
         foreach (var entry in _entries)
