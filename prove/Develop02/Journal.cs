@@ -66,4 +66,34 @@ public class Journal
             }
         }
     }
+
+        public void SaveToCSV(string file)
+    {
+        using (StreamWriter writer = new StreamWriter(file))
+        {
+            // Write the header
+            writer.WriteLine("Date,Prompt,Entry");
+
+            // Write each entry
+            foreach (var entry in _entries)
+            {
+                writer.WriteLine(entry.ToCSVString());
+            }
+        }
+    }
+
+    public void LoadFromCSV(string file)
+    {
+        using (StreamReader reader = new StreamReader(file))
+        {
+            _entries.Clear();
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                Entry entry = Entry.FromCSVString(line);
+                _entries.Add(entry);
+            }
+        }
+    }
+
 }

@@ -32,14 +32,16 @@ class Program
                 // Load the journal from a file
                 Console.Write("Enter the filename to load: ");
                 string file = Console.ReadLine();
-                journal.LoadFromFile(file);
+                // journal.LoadFromFile(file);
+                journal.LoadFromCSV(file);
             }
             else if (input == "4")
             {
                 // Save the journal to a file
                 Console.Write("Enter the filename to save: ");
                 string file = Console.ReadLine();
-                journal.SaveToFile(file);
+                // journal.SaveToFile(file);
+                journal.SaveToCSV(file);
             }
             else if (input == "5")
             {
