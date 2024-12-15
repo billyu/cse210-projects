@@ -10,9 +10,29 @@ public class BreathingActivity : Activity
     // Methods
     public void Run()
     {
+        // Clear the console and display the starting message
         Console.Clear();
         DisplayStartingMessage();
-        ShowSpinner(_duration);
+
+        // Show Get Ready message
+        Console.WriteLine("Get ready...");
+        ShowSpinner(3);
+        Console.WriteLine("\n");
+
+        // Set end time for the activity
+        DateTime endTime = DateTime.Now.AddSeconds(_duration);
+
+        // Show Breathe In and Out message until the duration is reached
+        while (DateTime.Now < endTime)
+        {
+            Console.Write("Breathe in...");
+            ShowCountdown(4);
+            Console.Write("\nBreathe out...");
+            ShowCountdown(6);
+            Console.WriteLine("\n");
+        }
+        
+        // Show Ending message
         DisplayEndingMessage();
     }
 }
