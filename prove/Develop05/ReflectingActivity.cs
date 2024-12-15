@@ -27,7 +27,7 @@ public class ReflectingActivity : Activity
     // Methods
     public void Run()
     {
-                // Clear the console and display the starting message
+        // Clear the console and display the starting message
         Console.Clear();
         DisplayStartingMessage();
 
@@ -71,7 +71,7 @@ public class ReflectingActivity : Activity
     {
         // Display a random prompt from the list _prompts
         Console.WriteLine("Consider the following prompt:\n");
-        Console.WriteLine($"--- {GetRandomPrompt()} ---\n");
+        Console.WriteLine($" --- {GetRandomPrompt()} ---\n");
 
         // Wait for user to press enter
         Console.WriteLine("When you have something in mind, press enter to continue.");
