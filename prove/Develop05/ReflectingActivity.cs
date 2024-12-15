@@ -3,6 +3,7 @@ public class ReflectingActivity : Activity
     // Attributes
     private List<string> _prompts;
     private List<string> _questions;
+    private int _questionsLeft;
 
     // Constructor
     public ReflectingActivity()
@@ -22,6 +23,7 @@ public class ReflectingActivity : Activity
                                         "What could you learn from this experience that applies to other situations?",
                                         "What did you learn about yourself through this experience?", 
                                         "How can you keep this experience in mind in the future?" };
+        _questionsLeft = _questions.Count;
     }
 
     // Methods
@@ -61,10 +63,26 @@ public class ReflectingActivity : Activity
 
     public string GetRandomQuestion()
     {
+        // If there are no questions left, reset _questionsLeft to the number of questions in the list _questions
+        if (_questionsLeft == 0)
+        {
+            _questionsLeft = _questions.Count;
+        }
+
         // Get a random question from the list _questions
         Random random = new Random();
-        int index = random.Next(_questions.Count);
-        return _questions[index];
+        int index = random.Next(_questionsLeft);
+        string nextQuestion = _questions[index];
+
+        // Swap the question with the last question in the list
+        _questions[index] = _questions[_questionsLeft - 1];
+        _questions[_questionsLeft - 1] = nextQuestion;
+
+        // Decrement the number of questions left
+        _questionsLeft--;
+
+        // Return the random question
+        return nextQuestion;
     }
 
     public void DisplayPrompt()
