@@ -53,7 +53,7 @@ public class ReflectingActivity : Activity
         DisplayEndingMessage();
     }
 
-    public string GetRandomPrompt()
+    private string GetRandomPrompt()
     {
         // Get a random prompt from the list _prompts
         Random random = new Random();
@@ -61,7 +61,7 @@ public class ReflectingActivity : Activity
         return _prompts[index];
     }
 
-    public string GetRandomQuestion()
+    private string GetRandomQuestion()
     {
         // If there are no questions left, reset _questionsLeft to the number of questions in the list _questions
         if (_questionsLeft == 0)
@@ -85,7 +85,7 @@ public class ReflectingActivity : Activity
         return nextQuestion;
     }
 
-    public void DisplayPrompt()
+    private void DisplayPrompt()
     {
         // Display a random prompt from the list _prompts
         Console.WriteLine("Consider the following prompt:\n");
@@ -96,7 +96,7 @@ public class ReflectingActivity : Activity
         Console.ReadLine();
     }
 
-    public void DisplayQuestions()
+    private void DisplayQuestions()
     {
         Console.Clear();
 

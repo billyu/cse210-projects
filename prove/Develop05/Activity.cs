@@ -11,7 +11,7 @@ public class Activity
     }
 
     // Methods
-    public void DisplayStartingMessage()
+    protected void DisplayStartingMessage()
     {
         Console.Clear();
 
@@ -26,7 +26,7 @@ public class Activity
         Console.Clear();
     }
 
-    public void DisplayEndingMessage()
+    protected void DisplayEndingMessage()
     {
         Console.WriteLine("Well done!!");
         ShowSpinner(3);
@@ -34,7 +34,7 @@ public class Activity
         ShowSpinner(3);
     }
 
-    public void ShowSpinner(int seconds)
+    protected void ShowSpinner(int seconds)
     {
         string spinner = "-\\|/";
 
@@ -50,7 +50,7 @@ public class Activity
         }
     }
 
-    public void ShowCountdown(int seconds)
+    protected void ShowCountdown(int seconds)
     {
         if (seconds <= 0 || seconds >= 10)
         {

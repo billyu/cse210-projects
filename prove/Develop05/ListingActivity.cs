@@ -45,7 +45,7 @@ public class ListingActivity : Activity
         DisplayEndingMessage();
     }
 
-    public string GetRandomPrompt()
+    private string GetRandomPrompt()
     {
         // Get a random prompt from the list _prompts
         Random random = new Random();
@@ -53,7 +53,7 @@ public class ListingActivity : Activity
         return _prompts[index];
     }
 
-    public List<string> GetListFromUser()
+    private List<string> GetListFromUser()
     {
         // Set end time for the activity
         DateTime endTime = DateTime.Now.AddSeconds(_duration);
