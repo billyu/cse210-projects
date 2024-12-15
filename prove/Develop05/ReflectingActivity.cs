@@ -27,23 +27,72 @@ public class ReflectingActivity : Activity
     // Methods
     public void Run()
     {
+                // Clear the console and display the starting message
+        Console.Clear();
+        DisplayStartingMessage();
+
+        // Show Get Ready message
+        Console.WriteLine("Get ready...");
+        ShowSpinner(3);
+        Console.WriteLine("\n");
+
+        // Display a random prompt from the list _prompts
+        DisplayPrompt();
+
+        // Ask user to get ready to answer questions
+        Console.WriteLine("Now, ponder on each of the following questions as they related to this experience.");
+        Console.Write("You may begin in: ");
+        ShowCountdown(4);
+
+        // Display a random question from the list _questions
+        DisplayQuestions();
+        
+        // Show Ending message
+        DisplayEndingMessage();
     }
 
     public string GetRandomPrompt()
     {
-        return "Default prompt";
+        // Get a random prompt from the list _prompts
+        Random random = new Random();
+        int index = random.Next(_prompts.Count);
+        return _prompts[index];
     }
 
     public string GetRandomQuestion()
     {
-        return "Default question";
+        // Get a random question from the list _questions
+        Random random = new Random();
+        int index = random.Next(_questions.Count);
+        return _questions[index];
     }
 
     public void DisplayPrompt()
     {
+        // Display a random prompt from the list _prompts
+        Console.WriteLine("Consider the following prompt:\n");
+        Console.WriteLine($"--- {GetRandomPrompt()} ---\n");
+
+        // Wait for user to press enter
+        Console.WriteLine("When you have something in mind, press enter to continue.");
+        Console.ReadLine();
     }
 
     public void DisplayQuestions()
     {
+        Console.Clear();
+
+        // Set end time for the activity
+        DateTime endTime = DateTime.Now.AddSeconds(_duration);
+
+        // Show random question from the list _questions until the duration is reached
+        while (DateTime.Now < endTime)
+        {
+            Console.Write($"> {GetRandomQuestion()} ");
+            ShowSpinner(5);
+            Console.WriteLine();
+        }
+
+        Console.WriteLine();
     }
 }
