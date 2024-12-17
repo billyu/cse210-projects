@@ -48,7 +48,7 @@ public class GoalManager
                 case "6":
                     return;
                 default:
-                    Console.WriteLine("Invalid input. Please try again.");
+                    Console.WriteLine("Invalid input.");
                     break;
             }
 
@@ -81,6 +81,15 @@ public class GoalManager
 
     private void ListGoalDetails()
     {
+        // Display goal details
+        Console.WriteLine("The goals are: ");
+        int index = 1;
+        foreach (Goal goal in _goals)
+        {
+            string status = goal.IsComplete() ? "X" : " ";
+            Console.WriteLine($"{index}. [{status}] {goal.GetDetailsString()}");
+            index++;
+        }
     }
 
     private void CreateGoal()
@@ -108,7 +117,7 @@ public class GoalManager
                 CreateChecklistGoal();
                 break;
             default:
-                Console.WriteLine("Invalid input. Please try again.");
+                Console.WriteLine("Invalid input.");
                 break;
         }
     }
@@ -163,7 +172,7 @@ public class GoalManager
 
         // Create goal
         Goal goal = new CheckListGoal(shortName, description, points, target, bonus);
-        
+
         // Add goal to list
         _goals.Add(goal);
     }
