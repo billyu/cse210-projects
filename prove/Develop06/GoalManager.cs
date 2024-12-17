@@ -171,7 +171,7 @@ public class GoalManager
         int bonus = int.Parse(Console.ReadLine());
 
         // Create goal
-        Goal goal = new CheckListGoal(shortName, description, points, target, bonus);
+        Goal goal = new CheckListGoal(shortName, description, points, bonus, target, 0);
 
         // Add goal to list
         _goals.Add(goal);
@@ -183,9 +183,88 @@ public class GoalManager
 
     private void SaveGoals()
     {
+        // Ask user for file name
+        Console.Write("What is the filename for the goal file? ");
+        string filename = Console.ReadLine();
+
+        // Open file for writing
+        using (StreamWriter writer = new StreamWriter(filename))
+        {
+            // First line is the score
+            writer.WriteLine(_score);
+
+            // Write each goal to the file
+            foreach (Goal goal in _goals)
+            {
+                // Determine the type of goal and save the name to a variable
+                string goalType;
+                if (goal is SimpleGoal)
+                {
+                    goalType = "SimpleGoal";
+                }
+                else if (goal is EternalGoal)
+                {
+                    goalType = "EternalGoal";
+                }
+                else if (goal is CheckListGoal)
+                {
+                    goalType = "CheckListGoal";
+                }
+                else
+                {
+                    goalType = "UnknownGoal";
+                }
+
+                // Write the goal to the file
+                // Goal Type and Goal Details are separated by a colon
+
+                writer.WriteLine($"{goalType}:{goal.GetStringRepresentation()}");
+            }
+        }
     }
 
     private void LoadGoals()
     {
+        // Ask user for file name
+        Console.Write("What is the filename for the goal file? ");
+        string filename = Console.ReadLine();
+
+        // Open file for reading
+        using (StreamReader reader = new StreamReader(filename))
+        {
+            // Read the score
+            _score = int.Parse(reader.ReadLine());
+
+            // Read each goal from the file
+            while (!reader.EndOfStream)
+            {
+                // Read the goal line
+                string goalLine = reader.ReadLine();
+
+                // Split the goal line into parts
+                string[] parts = goalLine.Split(new char[]{ ':', ','});
+
+                // Determine the type of goal
+                Goal goal;
+                switch (parts[0])
+                {
+                    case "SimpleGoal":
+                        goal = new SimpleGoal(parts[1], parts[2], int.Parse(parts[3]));
+                        break;
+                    case "EternalGoal":
+                        goal = new EternalGoal(parts[1], parts[2], int.Parse(parts[3]));
+                        break;
+                    case "CheckListGoal":
+                        goal = new CheckListGoal(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[4]), int.Parse(parts[5]), int.Parse(parts[6]));
+                        break;
+                    default:
+                        goal = null;
+                        break;
+                }
+
+                // Add goal to list
+                _goals.Add(goal);
+            }
+        }
     }
 }
