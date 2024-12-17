@@ -14,8 +14,14 @@ public class CheckListGoal : Goal
     }
 
     // Methods
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
+        _amountCompleted++;
+        if (_amountCompleted == _target)
+        {
+            return _points + _bonus;
+        }
+        return _points;
     }
 
     public override bool IsComplete()

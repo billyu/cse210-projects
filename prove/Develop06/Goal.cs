@@ -14,10 +14,14 @@ public abstract class Goal
     }
 
     // Methods
-    public abstract void RecordEvent();
+    public abstract int RecordEvent();
 
     public abstract bool IsComplete();
 
+    public string GetShortName()
+    {
+        return _shortName;
+    }
     public virtual string GetDetailsString()
     {
         return $"{_shortName} ({_description})";

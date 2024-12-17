@@ -10,8 +10,10 @@ public class SimpleGoal : Goal
     }
 
     // Methods
-    public override void RecordEvent()
+    public override int RecordEvent()
     {
+        _isComplete = true;
+        return _points;
     }
 
     public override bool IsComplete()

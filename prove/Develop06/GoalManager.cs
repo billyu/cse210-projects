@@ -77,6 +77,14 @@ public class GoalManager
 
     private void ListGoalNames()
     {
+        // Display goal names
+        Console.WriteLine("The goals are: ");
+        int index = 1;
+        foreach (Goal goal in _goals)
+        {
+            Console.WriteLine($"{index}. {goal.GetShortName()}");
+            index++;
+        }
     }
 
     private void ListGoalDetails()
@@ -179,6 +187,19 @@ public class GoalManager
 
     private void RecordEvent()
     {
+        // Display goal names
+        ListGoalNames();
+
+        // Ask user for goal index
+        Console.Write("Which goal did you accomplish? ");
+        int index = int.Parse(Console.ReadLine()) - 1;
+
+        // Record event
+        int pointsEarned = _goals[index].RecordEvent();
+        _score += pointsEarned;
+
+        // Display points earned
+        Console.WriteLine($"Congratulations! You have earned {pointsEarned} points.\n");
     }
 
     private void SaveGoals()
