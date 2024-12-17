@@ -107,6 +107,7 @@ public class GoalManager
         Console.WriteLine("  1. Simple Goal");
         Console.WriteLine("  2. Eternal Goal");
         Console.WriteLine("  3. Chekclist Goal");
+        Console.WriteLine("  4. Progressive Goal");
 
         // Ask user for goal type
         Console.Write("Which type of goal would you like to create? ");
@@ -123,6 +124,9 @@ public class GoalManager
                 break;
             case "3":
                 CreateChecklistGoal();
+                break;
+            case "4":
+                CreateProgressiveGoal();
                 break;
             default:
                 Console.WriteLine("Invalid input.");
@@ -164,6 +168,25 @@ public class GoalManager
         _goals.Add(goal);
     }
 
+    private void CreateProgressiveGoal()
+    {
+        // Ask user for goal details
+        Console.Write("What is the name of your goal? ");
+        string shortName = Console.ReadLine();
+        Console.Write("What is a short description of it? ");
+        string description = Console.ReadLine();
+        Console.Write("What is the amount of points assoicated with this goal? ");
+        int points = int.Parse(Console.ReadLine());
+        Console.Write("What is the extra points for each time the goal is recorded? ");
+        int extraPoints = int.Parse(Console.ReadLine());
+
+        // Create goal
+        Goal goal = new ProgressiveGoal(shortName, description, points, extraPoints, 0);
+
+        // Add goal to list
+        _goals.Add(goal);
+    }
+
     private void CreateChecklistGoal()
     {
         // Ask user for goal details
@@ -199,7 +222,7 @@ public class GoalManager
         _score += pointsEarned;
 
         // Display points earned
-        Console.WriteLine($"Congratulations! You have earned {pointsEarned} points.\n");
+        Console.WriteLine($"\nCongratulations! You have earned {pointsEarned} points.");
     }
 
     private void SaveGoals()
@@ -231,6 +254,10 @@ public class GoalManager
                 {
                     goalType = "CheckListGoal";
                 }
+                else if (goal is ProgressiveGoal)
+                {
+                    goalType = "ProgressiveGoal";
+                }
                 else
                 {
                     goalType = "UnknownGoal";
@@ -249,6 +276,9 @@ public class GoalManager
         // Ask user for file name
         Console.Write("What is the filename for the goal file? ");
         string filename = Console.ReadLine();
+
+        // Clear current goals
+        _goals.Clear();
 
         // Open file for reading
         using (StreamReader reader = new StreamReader(filename))
@@ -277,6 +307,9 @@ public class GoalManager
                         break;
                     case "CheckListGoal":
                         goal = new CheckListGoal(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[4]), int.Parse(parts[5]), int.Parse(parts[6]));
+                        break;
+                    case "ProgressiveGoal":
+                        goal = new ProgressiveGoal(parts[1], parts[2], int.Parse(parts[3]), int.Parse(parts[4]), int.Parse(parts[5]));
                         break;
                     default:
                         goal = null;
