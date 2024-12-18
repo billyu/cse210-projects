@@ -1,11 +1,11 @@
 public abstract class Activity
 {
     // Attributes
-    private DateTime _date;
-    private int _duration;
+    protected DateTime _date;
+    protected double _duration;  // in minutes
 
     // Constructor
-    public Activity(DateTime date, int duration)
+    public Activity(DateTime date, double duration)
     {
         _date = date;
         _duration = duration;
@@ -13,12 +13,16 @@ public abstract class Activity
 
     // Methods
     public abstract string GetName();
-    public abstract int GetDistance();
-    public abstract int GetSpeed();
-    public abstract int GetPace();
-    public string GetSummary()
+    public abstract double GetDistance();
+    public abstract double GetSpeed();
+    
+    public virtual double GetPace()
     {
-        return $"{_date.ToString("dd MMM yyyy")} {GetName()} ({_duration}): Distance {GetDistance()} km, Speed {GetSpeed()} km/h, Pace {GetPace()} min/km";
+        return 60 / GetSpeed();
     }
 
+    public virtual string GetSummary()
+    {
+        return $"{_date.ToString("dd MMM yyyy")} {GetName()} ({_duration}): Distance {GetDistance():F2} km, Speed {GetSpeed():F2} km/h, Pace {GetPace():F2} min/km";
+    }
 }
